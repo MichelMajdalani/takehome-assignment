@@ -65,6 +65,13 @@ def delete_show(id):
 
 # TODO: Implement the rest of the API here!
 
+@app.route('/shows/<id>', methods=['GET'])
+def show_show(id):
+    queriedData = db.getById('shows', int(id))
+    if queriedData is None:
+        return create_response(status=404, message="No show with this id exists")
+    return create_response(queriedData)
+
 """
 ~~~~~~~~~~~~ END API ~~~~~~~~~~~~
 """
