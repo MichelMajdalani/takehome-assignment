@@ -116,10 +116,11 @@ def update_show(id):
     
     # Verify whether they are empty or not. If not, update
     if len(name) > 0:
-        queriedData['name'] = name
+        queriedData = db.updateById('shows', int(id), {"name": name})
 
     if len(episodes_seen) > 0:
-        queriedData['episodes_seen'] = int(episodes_seen)
+        queriedData = db.updateById('shows', int(id), {"episodes_seen": episodes_seen})
+
 
     return create_response(status=201, data=queriedData)
 
