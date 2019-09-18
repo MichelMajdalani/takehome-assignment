@@ -96,6 +96,27 @@ def create_show():
     # Create response
     return create_response(status=201, data=new_data)
 
+@app.route('/shows/<id>', methods=['PUT'])
+def update_show(id):
+    # Get data from database
+    queriedData = db.getById('shows', int(id))
+    if queriedData is None:
+        return create_response(status=404, message='The object with this specified id does not exist.')
+    
+    # Extract information from request
+    name = request.form['name']
+    episodes_seen = request.form['episodes_seen']
+    
+    # Verify whether they are empty or not. If not, update
+    if len(name) > 0:
+        queriedData['name'] = name
+
+    if len(episodes_seen) > 0:
+        queriedData['episodes_seen'] = int(episodes_seen)
+
+    return create_response(status=201, data=queriedData)
+
+
 """
 ~~~~~~~~~~~~ END API ~~~~~~~~~~~~
 """
