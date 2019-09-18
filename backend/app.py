@@ -72,6 +72,30 @@ def show_show(id):
         return create_response(status=404, message="No show with this id exists")
     return create_response(queriedData)
 
+@app.route('/shows', methods=['POST'])
+def create_show():
+    message = ''
+    # Find how to access the body of a request
+    # Check if there is an error in parameters entered
+    name = request.form['name']
+    if len(name) == 0:
+        message += 'You did not enter a name. '
+
+    episodes_seen = request.form['episodes_seen']
+    print(episodes_seen)
+    if len(episodes_seen) == 0:
+        message += 'You did not enter an episodes_seen number. '
+
+    if len(message) > 0:
+        return create_response(status=422, message=message)
+    
+    # Convert to correct format before adding to database
+    episodes_seen = int(episodes_seen)
+    # Create object in database
+    new_data = db.create('shows', {"name": name, "episodes_seen": episodes_seen })
+    # Create response
+    return create_response(status=201, data=new_data)
+
 """
 ~~~~~~~~~~~~ END API ~~~~~~~~~~~~
 """
