@@ -17,5 +17,5 @@ export default new Router({
       name: "Counter",
       component: Counter
     }
-  ] // Add a new route here in Part 2
+  ]
 });
