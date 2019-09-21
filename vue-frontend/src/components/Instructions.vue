@@ -11,7 +11,6 @@
 
 <script>
 export default {
-  // PART 1: Add a "complete" prop here
   props: {
     complete: Boolean
   }

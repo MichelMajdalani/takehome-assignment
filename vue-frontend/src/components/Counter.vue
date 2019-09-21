@@ -10,7 +10,10 @@
 <script>
 export default {
   props: {
-    count: Number
+    count: {
+      default: 0,
+      type: Number
+    }
   },
   methods: {
     increment: function() {
