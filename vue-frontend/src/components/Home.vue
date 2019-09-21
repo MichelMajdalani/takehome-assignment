@@ -10,6 +10,8 @@
       :name="show.name"
       :episodes_seen="show.episodes_seen"
     />
+    <input placeholder="name">
+    <button type="button" v-on:click="add_data">Submit</button>
   </div>
 </template>
 
@@ -21,6 +23,13 @@ export default {
   components: {
     Instructions,
     Show
+  },
+  methods: {
+    add_data: function (event) {
+      let name = document.querySelector("input").value;
+      this.shows.push({id: (this.shows.length+1), name: name, episodes_seen: 0});
+      document.querySelector("input").value = "";
+    }
   },
   data() {
     return {
